@@ -1,0 +1,36 @@
+html, body {
+    margin: 2px;
+    padding: 0;
+    overflow: hidden; /* Hide scrollbars */
+}
+
+/* Center everything */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.canvasContainer {
+    position: relative;
+}
+
+#backCanvas {
+    border: solid;
+}
+
+#drawingCanvas {
+    border: solid;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+}
+
+#keyboardCanvas {
+    border: solid;
+    position: absolute;
+    top: 74%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+}
