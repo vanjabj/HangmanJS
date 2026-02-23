@@ -40,13 +40,12 @@ function createKeyboard() {
                 width: keyWidth,
                 height: keyHeight,
                 onClick: function () {
-                    if (!lettersTried.includes(key)) {
+                    if (!lettersTried.includes(key) && playingGame) {
                         ctx.fillStyle = "rgba(255, 227, 239, 0.62)";
                         ctx.beginPath();
                         ctx.fillRect(x, y, keyWidth, keyHeight);
                         ctx.fill()
                         lettersTried.push(key);
-                        console.log("Letters tried: " + lettersTried);
                         checkNewLetter(key);
                     }
                 }
@@ -74,16 +73,34 @@ function createKeyboard() {
 
 function checkNewLetter(key) {
     if (wordArray.includes(key)) {
-        // do something
+        for (let i = 0; i < guessedWord.length; i++) {
+            if (wordArray[i] == key) {
+                guessedWord[i] = key;
+            }
+        }
 
     } else {
         remainingLives -= 1;
     }
 
-    if (remainingLives <= 0) {
-        // do something
+    if (checkWord(guessedWord, wordArray)) {
+        console.log("You won!")
+        playingGame = false;
+    }
+    else if (remainingLives <= 0) {
+        console.log("You lost :(")
+        playingGame = false;
+        drawBoard();
+    }
+    
+    else {
+        drawBoard();
     }
 
-    playGame();
     console.log("Remaining lives: " + remainingLives);
+    console.log("Your correct letters are: " + guessedWord.join(''));
+}
+
+function checkWord(guessedWord, wordArray) {
+    return guessedWord.join('') === wordArray.join('');
 }
