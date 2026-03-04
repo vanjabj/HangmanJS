@@ -84,18 +84,15 @@ function checkNewLetter(key) {
     }
 
     if (checkWord(guessedWord, wordArray)) {
-        console.log("You won!")
+        console.log("You won!");
         playingGame = false;
     }
     else if (remainingLives <= 0) {
-        console.log("You lost :(")
+        console.log("You lost :(");
         playingGame = false;
-        drawBoard();
     }
     
-    else {
-        drawBoard();
-    }
+    drawBoard();
 
     console.log("Remaining lives: " + remainingLives);
     console.log("Your correct letters are: " + guessedWord.join(''));

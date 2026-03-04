@@ -3,7 +3,7 @@ const wordArray = randomWord.toUpperCase().split('');
 const numberOfLetters = wordArray.length;
 let guessedWord = Array(wordArray.length).fill('_ ');
 
-console.log(wordArray);
+// console.log(wordArray);
 
 // life counter
 const totalLives = 6;
@@ -37,7 +37,19 @@ const armStartY = ropeEndY+2*headRadius+legLength;
 const sizePerWord = 300;
 const textPlacementX = 600;
 const textPlacementY = 400;
+const sizePerDash = sizePerWord / (numberOfLetters + (numberOfLetters-1) / 2);
+const sizePerSpace = sizePerDash / 2;
 
+// keyboard inputs
+document.addEventListener("keydown", function (event) {
+    const pressedKey = event.key.toLowerCase();
+
+    keys.forEach(key => {
+        if (key.letter.toLowerCase() === pressedKey) {
+            key.onClick();   // 🔥 reuse same logic as mouse click
+        }
+    });
+});
 
 function drawBoard() {
     const canvas = document.getElementById("drawingCanvas")
@@ -48,10 +60,12 @@ function drawBoard() {
 
     drawMan(ctx);
     drawDashes(ctx);
-}
+    drawLetters(ctx);
 
-// somehow replacing each dash with letter when guessed correctly
-// replacing all remaing dashes if player loose
+    if (playingGame == false) {
+        drawAllLetters(ctx);
+    }
+}
 
 createCanvas();
 createKeyboard();

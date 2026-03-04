@@ -1,12 +1,35 @@
 function drawDashes(ctx) {
-    let sizePerDash = sizePerWord / (numberOfLetters + (numberOfLetters-1) / 2);
-    let sizePerSpace = sizePerDash / 2;
-
     for (let i=0; i < numberOfLetters; i++) {
         ctx.beginPath();
         ctx.moveTo(textPlacementX + (sizePerDash + sizePerSpace)*i, textPlacementY);
         ctx.lineTo(textPlacementX + (sizePerDash + sizePerSpace)*i + sizePerDash, textPlacementY);
         ctx.stroke();
+    }
+}
+
+function drawLetters(ctx) {
+    for (let i=0; i < numberOfLetters; i++) {
+        let x = textPlacementX + (sizePerDash + sizePerSpace)*i + sizePerDash/2;
+        let y = textPlacementY - sizePerWord/25;
+        if (guessedWord[i] === wordArray[i]) {
+            ctx.fillStyle = "#000";
+            ctx.font = "16px Arial";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(wordArray[i], x, y);
+        }
+    }
+}
+
+function drawAllLetters(ctx) {
+    for (let i=0; i < numberOfLetters; i++) {
+        let x = textPlacementX + (sizePerDash + sizePerSpace)*i + sizePerDash/2;
+        let y = textPlacementY - sizePerWord/25;
+        ctx.fillStyle = "#000";
+        ctx.font = "16px Arial";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(wordArray[i], x, y);
     }
 }
 
