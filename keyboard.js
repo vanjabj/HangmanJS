@@ -85,6 +85,7 @@ function checkNewLetter(key) {
 
     if (checkWord(guessedWord, wordArray)) {
         console.log("You won!");
+        gameWon = true;
         playingGame = false;
     }
     else if (remainingLives <= 0) {

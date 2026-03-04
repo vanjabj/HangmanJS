@@ -9,6 +9,7 @@ let guessedWord = Array(wordArray.length).fill('_ ');
 const totalLives = 6;
 let remainingLives = totalLives;
 let playingGame = true;
+let gameWon = false;
 
 // keyboard 
 let keys = [];
@@ -27,11 +28,11 @@ const standTop = 80;
 const standBottom = 420;
 const standLeft = 150;
 const standRight = 300;
-const ropeEndY = standTop+50;
+let ropeEndY = standTop+50;
 const headRadius = 40;
-const bodyEnd = ropeEndY + 2*headRadius + 120;
+let bodyEnd = ropeEndY + 2*headRadius + 120;
 const legLength = 50;
-const armStartY = ropeEndY+2*headRadius+legLength;
+let armStartY = ropeEndY+2*headRadius+legLength;
 
 // setting the parameters for drawing dashes and letters
 const sizePerWord = 300;
@@ -46,7 +47,7 @@ document.addEventListener("keydown", function (event) {
 
     keys.forEach(key => {
         if (key.letter.toLowerCase() === pressedKey) {
-            key.onClick();   // 🔥 reuse same logic as mouse click
+            key.onClick();   // reuse same logic as mouse click
         }
     });
 });
@@ -58,12 +59,14 @@ function drawBoard() {
     ctx.fillStyle = "rgba(255, 227, 239, 0.81)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+    drawStand(ctx);
     drawMan(ctx);
     drawDashes(ctx);
     drawLetters(ctx);
 
     if (playingGame == false) {
         drawAllLetters(ctx);
+        printWinText(ctx, canvas.width / 1.35, canvas.height / 2);
     }
 }
 
